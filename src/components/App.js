@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProductList from "./ProductList";
 import Cart from "./Cart";
 
+
 const App = () => {
   const [products] = useState([
     { id: 1, name: "T-Shirt", price: 20 },
@@ -30,11 +31,11 @@ const App = () => {
 
   const updateCartItem = (id, quantity) => {
     setCart((prevCart) =>
-      prevCart
-        .map((item) =>
-          item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
-        )
-        .filter((item) => item.quantity > 0)
+      quantity === 0
+        ? prevCart.filter((item) => item.id !== id) 
+        : prevCart.map((item) =>
+            item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item
+          )
     );
   };
 
